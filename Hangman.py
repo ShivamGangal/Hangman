@@ -1,26 +1,28 @@
 
 
 class GameOfHangman():
-    def __init__(self):
+    def __init__(self,numFailed,phrase,coded,lettersGuessed):
         # what vars go in here  
-        global numFailed
         numFailed=0
-        global lettersGuessed
-        lettersGuessed =[]
-        global phrase
-        global coded
+        self.numFailed = numFailed
+        lettersGuessed = []
+        self.lettersGuessed=lettersGuessed
         phrase = input("What phrase would you like the player to guess?\n")
+        self.phrase=phrase
         phrase = phrase.lower()
         coded = []
-        for i in range(len(phrase)): # Codes the phrase 
+        self.coded=coded
+        for i in range(len(self.phrase)): # Codes the phrase 
             if phrase[i] != " ":
-                coded.append("_")
+                self.coded.append("_")
             else:
-                coded.append(" ")
-        coded = (''.join(coded))
-        print("\n"+coded)
+                self.coded.append(" ")
+        self.coded = (''.join(self.coded))
+        print("\n"+self.coded)
         return
     def play(self):
+            global numFailed
+            numFailed=0
             hangingMan = [
             ["__________"],
             ["|        |"],
@@ -129,12 +131,12 @@ class GameOfHangman():
         numFailed=+1
        else:
         for i in Location:
-            coded.replace(newInput,coded(i))    
+            coded.replace(newInput,coded[int(i)])
 
        GameOfHangman.render(numFailed)
        print(coded)
        return numFailed
-    
+
     def exit(self):
         if numFailed == 6:
             print("The correct phrase was "+ phrase)
