@@ -21,8 +21,6 @@ class GameOfHangman():
         print("\n"+self.coded)
         return
     def play(self):
-            global numFailed
-            numFailed=0
             hangingMan = [
             ["__________"],
             ["|        |"],
@@ -36,11 +34,11 @@ class GameOfHangman():
             for row in hangingMan:  # Renders
                 for content in row: 
                     print(content)
-            while (numFailed !=6):
-                GameOfHangman.play_turn(numFailed)
+            while (self.numFailed !=6):
+                GameOfHangman.play_turn(self.numFailed)
             return 
     def render(self,numFailed):
-        if numFailed ==6:
+        if self.numFailed ==6:
             hangingMan = [
             ["__________"],
             ["|        |"],
@@ -51,7 +49,7 @@ class GameOfHangman():
             ["|"],
             ["|_________"]
         ]
-        elif numFailed == 5:
+        elif self.numFailed == 5:
             hangingMan = [
             ["__________"],
             ["|        |"],
@@ -62,7 +60,7 @@ class GameOfHangman():
             ["|"],
             ["|_________"]
         ]
-        elif numFailed == 4:
+        elif self.numFailed == 4:
             hangingMan = [
             ["__________"],
             ["|        |"],
@@ -73,7 +71,7 @@ class GameOfHangman():
             ["|"],
             ["|_________"]
         ]
-        elif numFailed == 3:
+        elif self.numFailed == 3:
             hangingMan = [
             ["__________"],
             ["|        |"],
@@ -84,7 +82,7 @@ class GameOfHangman():
             ["|         "],
             ["|_________"]
         ]
-        elif numFailed == 2:
+        elif self.numFailed == 2:
             hangingMan = [
             ["__________"],
             ["|        |"],
@@ -95,7 +93,7 @@ class GameOfHangman():
             ["|         "],
             ["|_________"]
         ]
-        elif numFailed == 1:
+        elif self.numFailed == 1:
             hangingMan = [
             ["__________"],
             ["|        |"],
@@ -106,7 +104,7 @@ class GameOfHangman():
             ["|         "],
             ["|_________"]
         ]
-        elif numFailed == 0:
+        elif self.numFailed == 0:
             hangingMan = [
             ["__________"],
             ["|        |"],
@@ -122,23 +120,23 @@ class GameOfHangman():
                 print(content)
         return
     def play_turn(self):
-       if coded.lower() == phrase.lower():
+       if self.coded.lower() == self.phrase.lower():
         GameOfHangman.end()
        newInput=input("What letter would you like to guess?\n")
-       lettersGuessed.append(newInput)
-       Location = GameOfHangman.find(phrase,newInput)
+       self.lettersGuessed.append(newInput)
+       Location = GameOfHangman.find(self.phrase,newInput)
        if Location == []:
-        numFailed=+1
+        self.numFailed=+1
        else:
         for i in Location:
-            coded.replace(newInput,coded[int(i)])
+            self.coded.replace(newInput,coded[int(i)])
 
-       GameOfHangman.render(numFailed)
-       print(coded)
-       return numFailed
+       GameOfHangman.render(self.numFailed)
+       print(self.coded)
+       return self.numFailed
 
     def exit(self):
-        if numFailed == 6:
+        if self.numFailed == 6:
             print("The correct phrase was "+ phrase)
         else:
             print("You guessed the phrase right! You win!")
