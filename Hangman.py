@@ -138,7 +138,7 @@ class GameOfHangman():
 
     def exit(self):
         if self.numFailed == 6:
-            print("The correct phrase was "+ phrase)
+            print("The correct phrase was "+ self.phrase)
         else:
             print("You guessed the phrase right! You win!")
                    
