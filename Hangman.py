@@ -22,11 +22,14 @@ class GameOfHangman():
         # print("\n"+self.coded)
         # return
 
-    # def mask_word(self):
-    #     # want a set of all unique characters 
+    def update_word_mask(self,letter_locations, player_guess):
+        # want a set of all unique characters 
+        word_mask = list(self.masked_word)
 
-    #     # if 
-    #     return 
+        for i in letter_locations:
+            word_mask[i]=player_guess
+        
+        self.masked_word = ''.join(word_mask)
         
 
     def init_game(self):
@@ -35,17 +38,25 @@ class GameOfHangman():
         guess_word = input("What phrase would you like the player to guess?\n")
         self.guess_word = guess_word
         #phrase = phrase.lower()
-
-        self.masked_word = ['_' for i in range(len(self.guess_word))]
-
-        return 
+        masked_word = ['_' for i in range(len(self.guess_word))]
+        self.masked_word = ''.join(masked_word)       
+ 
 
     def play(self):
             self.init_game()
             self.render()
-            while ((self.guess_word.lower() == self.masked_word.lower()) or self.numFailed==6):
+
+            guessed_word_correctly = self.guess_word.lower() == self.masked_word.lower()
+
+            while (not guessed_word_correctly and  self.numFailed!=6):
                 self.play_turn()
-            return 
+            
+            if guessed_word_correctly:
+                print('You won!')
+            else: 
+                print('You lose')
+
+        
 
 
     def render(self):
@@ -145,23 +156,15 @@ class GameOfHangman():
         player_guess=input("What letter would you like to guess?\n")
         self.lettersGuessed.append(player_guess)
        
-        if player_guess in self.guess_phrase: 
+        if player_guess in self.guess_word: 
             letter_locations = GameOfHangman.find(self.guess_word,player_guess) 
-            for i in letter_locations:
-                self.masked_word[i] = str(self.player_guess) 
+            self.update_word_mask(letter_locations,player_guess)
 
         else: 
             self.numFailed +=1 
        
         self.render()
 
-    def exit(self):
-        if self.numFailed == 6:
-            print("The correct phrase was "+ self.guess_phrase)
-        else:
-            print("You guessed the phrase right! You win!")
-                   
-        return 
     
     @staticmethod
     def find(str, ch):
@@ -174,6 +177,7 @@ class GameOfHangman():
 def main():
     game = GameOfHangman()
     game.play()
+
 
 # # Stages Function
 # def visual(numFailed):
