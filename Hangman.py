@@ -1,7 +1,7 @@
 
 
 class GameOfHangman():
-    def __init__(self,numFailed,phrase,coded,lettersGuessed):
+    def __init__(self):
         # what vars go in here  
         numFailed=0
         self.numFailed = numFailed
@@ -35,9 +35,9 @@ class GameOfHangman():
                 for content in row: 
                     print(content)
             while (self.numFailed !=6):
-                GameOfHangman.play_turn(self.numFailed)
+                self.play_turn()
             return 
-    def render(self,numFailed):
+    def render(self):
         if self.numFailed ==6:
             hangingMan = [
             ["__________"],
@@ -120,18 +120,19 @@ class GameOfHangman():
                 print(content)
         return
     def play_turn(self):
-       if self.coded.lower() == self.phrase.lower():
-        GameOfHangman.end()
+       if self.coded.lower() == self.phrase.lower() or self.numFailed==6:
+        self.end()
        newInput=input("What letter would you like to guess?\n")
        self.lettersGuessed.append(newInput)
+       print(self.lettersGuessed)
        Location = GameOfHangman.find(self.phrase,newInput)
        if Location == []:
         self.numFailed=+1
        else:
         for i in Location:
-            self.coded.replace(newInput,coded[int(i)])
+            self.coded.replace(newInput,self.coded[int(i)])
 
-       GameOfHangman.render(self.numFailed)
+       self.render()
        print(self.coded)
        return self.numFailed
 
