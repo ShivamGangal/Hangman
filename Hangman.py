@@ -142,15 +142,17 @@ class GameOfHangman():
            for content in row: 
                 print(content)
 
+        print('\n')
+
         print(self.masked_word)
+
+        print("\n")
 
         # print out the lettters guessed at base of hangman
         for letter in self.lettersGuessed: 
             print(letter,end=' ')
+        
         print('\n')
-
-
-        return
 
     def play_turn(self):
         # player can only guess a single letter at a time
