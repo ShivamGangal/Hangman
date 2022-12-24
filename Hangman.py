@@ -8,8 +8,8 @@ class GameOfHangman():
         # lettersGuessed = []
         # self.lettersGuessed=lettersGuessed
         self.numFailed = 0
-        self.lettersGuessed = []
-        self.guess_phrase = None 
+        self.lettersGuessed = [] # set or an array 
+        self.guess_word = None 
 
         # coded = []
         # self.coded=coded
@@ -22,34 +22,33 @@ class GameOfHangman():
         # print("\n"+self.coded)
         # return
 
-    def mask_phrase(self):
-        # want a set of all unique characters 
+    # def mask_word(self):
+    #     # want a set of all unique characters 
 
-        # if 
-        return 
+    #     # if 
+    #     return 
         
 
     def init_game(self):
         # intialize any necessary game state 
 
-        guess_phrase = input("What phrase would you like the player to guess?\n")
-        self.guess_phrase = guess_phrase
+        guess_word = input("What phrase would you like the player to guess?\n")
+        self.guess_word = guess_word
         #phrase = phrase.lower()
 
-        self.masked_word = ['_' for i in len(self.guess_word)]
+        self.masked_word = ['_' for i in range(len(self.guess_word))]
 
         return 
 
     def play(self):
             self.init_game()
             self.render()
-            while ((self.coded.lower() == self.phrase.lower()) or self.numFailed==6):
+            while ((self.guess_word.lower() == self.masked_word.lower()) or self.numFailed==6):
                 self.play_turn()
             return 
 
 
     def render(self):
-
 
         if self.numFailed ==6:
             hangingMan = [
@@ -141,26 +140,24 @@ class GameOfHangman():
         return
 
     def play_turn(self):
-    
-       newInput=input("What letter would you like to guess?\n")
-       self.lettersGuessed.append(newInput)
+        # player can only guess a single letter at a time
+        
+        player_guess=input("What letter would you like to guess?\n")
+        self.lettersGuessed.append(player_guess)
        
-       #print(self.lettersGuessed)
-       Location = GameOfHangman.find(self.phrase,newInput)
-       if Location == []:
-        self.numFailed=+1
-       else:
-        for i in Location:
-            self.coded.replace(newInput,self.coded[int(i)])
+        if player_guess in self.guess_phrase: 
+            letter_locations = GameOfHangman.find(self.guess_word,player_guess) 
+            for i in letter_locations:
+                self.masked_word[i] = str(self.player_guess) 
 
+        else: 
+            self.numFailed +=1 
        
-       self.render()
-       print(self.coded)
-       return self.numFailed
+        self.render()
 
     def exit(self):
         if self.numFailed == 6:
-            print("The correct phrase was "+ self.guess_phrasephrase)
+            print("The correct phrase was "+ self.guess_phrase)
         else:
             print("You guessed the phrase right! You win!")
                    
