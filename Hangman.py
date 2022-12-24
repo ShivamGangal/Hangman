@@ -3,41 +3,54 @@
 class GameOfHangman():
     def __init__(self):
         # what vars go in here  
-        numFailed=0
-        self.numFailed = numFailed
-        lettersGuessed = []
-        self.lettersGuessed=lettersGuessed
-        phrase = input("What phrase would you like the player to guess?\n")
-        self.phrase=phrase
-        phrase = phrase.lower()
-        coded = []
-        self.coded=coded
-        for i in range(len(self.phrase)): # Codes the phrase 
-            if phrase[i] != " ":
-                self.coded.append("_")
-            else:
-                self.coded.append(" ")
-        self.coded = (''.join(self.coded))
-        print("\n"+self.coded)
-        return
+        # numFailed=0
+        # self.numFailed = numFailed
+        # lettersGuessed = []
+        # self.lettersGuessed=lettersGuessed
+        self.numFailed = 0
+        self.lettersGuessed = []
+        self.guess_phrase = None 
+
+        # coded = []
+        # self.coded=coded
+        # for i in range(len(self.guess_phrase)): # Codes the phrase 
+        #     if self.guess_phrase[i] != " ":
+        #         self.coded.append("_")
+        #     else:
+        #         self.coded.append(" ")
+        # self.coded = (''.join(self.coded))
+        # print("\n"+self.coded)
+        # return
+
+    def mask_phrase(self):
+        # want a set of all unique characters 
+
+        # if 
+        return 
+        
+
+    def init_game(self):
+        # intialize any necessary game state 
+
+        guess_phrase = input("What phrase would you like the player to guess?\n")
+        self.guess_phrase = guess_phrase
+        #phrase = phrase.lower()
+
+        self.masked_word = ['_' for i in len(self.guess_word)]
+
+        return 
+
     def play(self):
-            hangingMan = [
-            ["__________"],
-            ["|        |"],
-            ["|         "],
-            ["|         "],
-            ["|         "],
-            ["|         "],
-            ["|         "],
-            ["|_________"]
-            ]
-            for row in hangingMan:  # Renders
-                for content in row: 
-                    print(content)
-            while (self.numFailed !=6):
+            self.init_game()
+            self.render()
+            while ((self.coded.lower() == self.phrase.lower()) or self.numFailed==6):
                 self.play_turn()
             return 
+
+
     def render(self):
+
+
         if self.numFailed ==6:
             hangingMan = [
             ["__________"],
@@ -115,16 +128,24 @@ class GameOfHangman():
             ["|         "],
             ["|_________"]
         ]
-        for row in hangingMan:  # Renders
+        for row in hangingMan:  # Renders Hangman structure 
            for content in row: 
                 print(content)
+
+        # print out the lettters guessed at base of hangman
+        for letter in self.lettersGuessed: 
+            print(letter,sep=' ')
+        print('\n')
+
+
         return
+
     def play_turn(self):
-       if self.coded.lower() == self.phrase.lower() or self.numFailed==6:
-        self.end()
+    
        newInput=input("What letter would you like to guess?\n")
        self.lettersGuessed.append(newInput)
-       print(self.lettersGuessed)
+       
+       #print(self.lettersGuessed)
        Location = GameOfHangman.find(self.phrase,newInput)
        if Location == []:
         self.numFailed=+1
@@ -132,13 +153,14 @@ class GameOfHangman():
         for i in Location:
             self.coded.replace(newInput,self.coded[int(i)])
 
+       
        self.render()
        print(self.coded)
        return self.numFailed
 
     def exit(self):
         if self.numFailed == 6:
-            print("The correct phrase was "+ phrase)
+            print("The correct phrase was "+ self.guess_phrasephrase)
         else:
             print("You guessed the phrase right! You win!")
                    
