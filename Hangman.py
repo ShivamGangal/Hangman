@@ -142,9 +142,11 @@ class GameOfHangman():
            for content in row: 
                 print(content)
 
+        print(self.masked_word)
+
         # print out the lettters guessed at base of hangman
         for letter in self.lettersGuessed: 
-            print(letter,sep=' ')
+            print(letter,end=' ')
         print('\n')
 
 
