@@ -1,4 +1,5 @@
-
+import requests
+import random
 
 class GameOfHangman():
     def __init__(self):
@@ -9,8 +10,12 @@ class GameOfHangman():
         # self.lettersGuessed=lettersGuessed
         self.numFailed = 0
         self.lettersGuessed = [] # set or an array 
-        self.guess_word = None 
 
+        word_site = "https://www.mit.edu/~ecprice/wordlist.10000"
+
+        response = requests.get(word_site)
+        self.WORDS = response.content.splitlines()
+        print("breakpoint")
         # coded = []
         # self.coded=coded
         # for i in range(len(self.guess_phrase)): # Codes the phrase 
@@ -38,7 +43,9 @@ class GameOfHangman():
     def init_game(self):
         # intialize any necessary game state 
 
-        guess_word = input("What phrase would you like the player to guess?\n")
+        ranD = random.randint(0, len(self.WORDS))
+        self.WORDS = list(self.WORDS)
+        guess_word = str(self.WORDS[ranD])
         self.guess_word = guess_word
         #phrase = phrase.lower()
         masked_word = ['_' for i in range(len(self.guess_word))]
