@@ -15,7 +15,7 @@ class GameOfHangman():
 
         response = requests.get(word_site)
         self.WORDS = response.content.splitlines()
-        print("breakpoint")
+        #print("breakpoint")
         # coded = []
         # self.coded=coded
         # for i in range(len(self.guess_phrase)): # Codes the phrase 
