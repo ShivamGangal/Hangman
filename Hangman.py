@@ -25,9 +25,12 @@ class GameOfHangman():
     def update_word_mask(self,letter_locations, player_guess):
         # want a set of all unique characters 
         word_mask = list(self.masked_word)
-
-        for i in letter_locations:
-            word_mask[i]=player_guess
+        check_against = list(self.guess_word)
+        for i in list(letter_locations):
+            if check_against[i] == player_guess.upper():
+                word_mask[i]=player_guess.upper()
+            else:
+                word_mask[i]=player_guess.lower()
         
         self.masked_word = ''.join(word_mask)
         
@@ -162,8 +165,8 @@ class GameOfHangman():
         player_guess=input("What letter would you like to guess?\n")
         self.lettersGuessed.append(player_guess)
        
-        if player_guess in self.guess_word: 
-            letter_locations = GameOfHangman.find(self.guess_word,player_guess) 
+        if player_guess.lower() in self.guess_word.lower(): 
+            letter_locations = GameOfHangman.find(self.guess_word.lower(),player_guess.lower()) 
             self.update_word_mask(letter_locations,player_guess)
 
         else: 
