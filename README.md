@@ -3,7 +3,7 @@
 This is an implementation of Hangman using python
 
 ## Setup 
-To setup this game, simply clone the repository and then press the run button while connected to the internet. To run the code without errors, please take notice of the requirements.txt file. To encounter errors, ignore that file, and run the code at will. 
+To setup this game, simply clone the repository and then press the run button while connected to the internet. To run the code without errors, please take notice of the requirements.txt file.
 
 ## How to play 
 
