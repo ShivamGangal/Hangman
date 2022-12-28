@@ -3,9 +3,19 @@
 This is an implementation of Hangman using python
 
 ## Setup 
-To setup this game, simply clone the repository and then press the run button while connected to the internet. To run the code without errors, please take notice of the requirements.txt file.
+To setup this game, simply clone the repository. 
+
+Create a conda environment or a virtual environment of your choice. 
+Utilize the commmand down below to install dependencies. 
+```bash 
+pip  install -r requirements.txt
+```
 
 ## How to play 
 
-With the setup complete, run the code. It will automatically choose a word for you to guess. There is a large word set, you can play this for hours.
+To play the game run the following command: 
+
+```bash 
+python Hangman.py
+```
 
